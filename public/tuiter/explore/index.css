@@ -1,0 +1,124 @@
+
+.wd-rounded-corners-all-around {
+    border-radius: 50px;
+    
+   }
+.wd-bg-col{
+    background-color: lightgray;
+}
+.wd-box{
+    width: 100%;
+    border: none;
+    font-size: medium;
+    outline: none;
+    border: none;
+    
+    
+}
+.wd-searchcont{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.wd-searchcont2{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 25px; /* Adjust the font size as desired */
+    padding: 5px;
+
+}
+
+.wd-leftall{
+
+    margin-left: 25px;
+    margin-right: 15px;
+    font-size: 30px;
+    
+}
+li#id{
+    font-size: large;
+    color: darkgray;
+
+}
+.wd-navtabs{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+.wd-nonselect{
+    padding-bottom: 10px;
+}
+.wd-selected{
+    font-size: large;
+    font-weight: bold;
+    color: black;
+    border-bottom: 5px solid blue;
+    padding-bottom: 10px; 
+
+}
+.wd-image{
+    width: 100%;
+    height: 300px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.wd-overlay{
+    position: absolute;
+    top: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+    color:white;
+    font-weight: bolder;
+    
+}
+
+.wd-tweets{
+    color: darkgray;
+
+}
+.wd-labell{
+    position: relative;
+    top: 50%;
+    margin-left: -30px;
+    
+}
+.wd-ic{
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
+}
+.wd-list{
+    list-style-type: none;
+}
+.wd-side{
+    vertical-align: top;
+    width:100%;
+}
+.wd-all{
+    vertical-align: top
+}
+.wd-sel{
+    background-color: blue; 
+    color: white;
+}
+.wd-cust{
+    color: white;
+    text-decoration-style: none;
+}
+
+.wd-custom-height {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover;
+}
+.wd-tutimg {
+    width: 48px; 
+    height:48px; 
+    float: right;
+    object-fit: cover;
+}
+
