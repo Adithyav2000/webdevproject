@@ -18,10 +18,10 @@ function Tuiter() {
        </div>
        <div className="col-7">
          <Routes>
-  <Route path="home" element={<HomeScreen/>} />
-  <Route path="explore" element={<ExploreScreen />} />
-  <Route path="bookmarks" element={<BookmarksScreen />} />
-  <Route path="profile" element={<ProfileScreen />} />
+  <Route path="/home" element={<HomeScreen/>} />
+  <Route path="/explore" element={<ExploreScreen />} />
+  <Route path="/bookmarks" element={<BookmarksScreen />} />
+  <Route path="/profile" element={<ProfileScreen />} />
 </Routes>
 
        </div>
