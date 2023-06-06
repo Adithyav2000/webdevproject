@@ -20,6 +20,15 @@ const tuitsSlice = createSlice({
  name: 'tuits',
  initialState: { tuits: tuits },
  reducers: {
+  liked(state, action) {
+    const index = state.tuits
+       .findIndex(tuit =>
+          tuit._id === action.payload);
+    const flag = !state.tuits[index].liked
+    state.tuits[index].liked = flag;
+    state.tuits[index].likes=flag ? state.tuits[index].likes+1 : state.tuits[index].likes-1
+  },
+
   deleteTuit(state, action) {
     const index = state.tuits
        .findIndex(tuit =>
@@ -36,7 +45,7 @@ const tuitsSlice = createSlice({
   }
  });
  
- export const {createTuit, deleteTuit} = tuitsSlice.actions;
+ export const {createTuit, deleteTuit, liked} = tuitsSlice.actions;
  
 
 export default tuitsSlice.reducer

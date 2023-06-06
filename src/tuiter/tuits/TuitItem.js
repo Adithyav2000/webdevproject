@@ -2,7 +2,8 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {deleteTuit} from "../reducers/tuits-reducer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import TuitStats from "./TuitStats";
+import {VscVerifiedFilled} from "react-icons/vsc"
 const TuitItem = (
  {
    tuit = {
@@ -15,7 +16,7 @@ const deleteTuitHandler = (id) => {
 }
 
  return(
-
+  <div>
   <li className="list-group-item">
    <div className="row">
      <div className="col-auto">
@@ -24,12 +25,18 @@ const deleteTuitHandler = (id) => {
      <div className="col-10"> <div className="float-left">
      <i className="bi bi-x-lg float-end"
             onClick={() => deleteTuitHandler(tuit._id)}></i> 
-       <div> <span className="fw-bolder">{tuit.userName} </span> . {tuit.time}</div>
-       <div>{tuit.title}</div>
+       <div> <span className="fw-bolder">{tuit.userName} </span> <VscVerifiedFilled className="md-3" color="blue"/> {tuit.handle} . {tuit.time}</div>
+       <div>{tuit.tuit}
+       <br/>
+   <TuitStats tuit={tuit}/>
        </div>
+       </div>
+       
      </div>
    </div>
   </li>
+  </div>
+  
  );
 };
 export default TuitItem;
