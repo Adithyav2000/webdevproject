@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {deleteTuit} from "../reducers/tuits-reducer";
+import {deleteTuitThunk} from "../services/tuits-thunks";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TuitStats from "./TuitStats";
 import {VscVerifiedFilled} from "react-icons/vsc"
@@ -12,7 +12,7 @@ const TuitItem = (
 ) => {
 const dispatch = useDispatch();
 const deleteTuitHandler = (id) => {
-  dispatch(deleteTuit(id));
+  dispatch(deleteTuitThunk(id));
 }
 
  return(
