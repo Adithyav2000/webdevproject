@@ -1,5 +1,4 @@
 import { Routes, Route} from "react-router";
-import Nav from "../nav";
 import NavigationSidebar from "./navigation-sidebar";
 import BookmarksScreen from "./bookmarks-screen";
 import HomeScreen from "./home-screen";
@@ -23,7 +22,6 @@ function Tuiter() {
  return (
   <Provider store={store}>
    <div>
-     <Nav />
      <div className="row">
        <div className="col-2">
          <NavigationSidebar />
