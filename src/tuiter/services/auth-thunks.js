@@ -13,6 +13,7 @@ export const loginThunk = createAsyncThunk(
 export const profileThunk = createAsyncThunk(
     "auth/profile", async () => {
     const response = authService.profile();
+    console.log(response.data)
     return response.data;
    });
    export const logoutThunk = createAsyncThunk(

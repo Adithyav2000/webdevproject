@@ -6,6 +6,7 @@ import{CiViewList, CiCircleMore} from "react-icons/ci"
 import { useSelector } from "react-redux";
 import {BiLogIn} from "react-icons/bi"
 import { Link, useLocation } from "react-router-dom";
+import "../navigation-sidebar/index.css"
 
 const NavigationSidebar = () => {
 const [isOpen, setIsOpen] = useState(false);  
@@ -16,19 +17,22 @@ const { currentUser } = useSelector((state) => state.user);
  const nav = [AiOutlineHome, BsHash, IoIosNotificationsOutline, BsEnvelope, BsBookmark, CiViewList, CiCircleMore];
  return (
   <>
-  <button onClick={() => setIsOpen(true)}>More</button>
-  <div className={`list-group ${isOpen ? "open" : ""}`}>
-    <AiOutlineClose onClick={() => setIsOpen(false)} />
+      <button onClick={() => setIsOpen(true)}>More</button>
+      {isOpen && <div id="overlay" onClick={() => setIsOpen(false)}></div>}
+      
+      <div id="sidebar" className={`list-group  ${isOpen ? "open" : ""}`}>
+        <AiOutlineClose onClick={() => setIsOpen(false)} />
     {links.map((link,index) => 
-      <Link to={`/tuiter/${link}`} className={`list-group-item text-capitalize ${active === link ? "active" : ""}`}>
+      <Link to={`/tuiter/${link}`} id="coll"  className={` list-group-item text-capitalize ${active === link ? "active" : ""}`}>
         {createElement(nav[index])}
         <span>     </span>
         {link}
       </Link>
     )  
     }
+    {console.log(currentUser)}
       {!currentUser && (
-      <Link className="list-group-item text-capitalize" to="/tuiter/login">
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/login">
         {createElement(BiLogIn)} 
         <span>     </span>
 
@@ -37,7 +41,7 @@ const { currentUser } = useSelector((state) => state.user);
     )}
 
 {!currentUser && (
-      <Link className="list-group-item text-capitalize" to="/tuiter/register">
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/register">
         {createElement(IoIosCreate)} 
         <span>     </span>
         register
@@ -45,7 +49,7 @@ const { currentUser } = useSelector((state) => state.user);
     )}
     
     {currentUser && (
-      <Link className="list-group-item text-capitalize" to="/tuiter/profile">
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/profile">
        {createElement(AiOutlineUser)} 
        <span>     </span>
        Profile

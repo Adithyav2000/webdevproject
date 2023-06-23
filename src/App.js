@@ -4,8 +4,9 @@ import {Routes, Route, Navigate} from "react-router";
 
 function App() {
   return (
+    
     <BrowserRouter>
-      <div className="container">
+      <div className="container" >
         <Routes>
         <Route path="/"         element={< Navigate to="/tuiter"/>}/>
           <Route path="/tuiter/*" element={<Tuiter/>}/>

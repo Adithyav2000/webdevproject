@@ -18,7 +18,9 @@ export const logout = async () => {
     return response;
    };
    export const updateUser = async (user) => {
+    console.log(user)
     const response = await api.put(`${USERS_URL}`, user);
+
     return response.data;
    };
    export const register = async ({ username, password, firstname,lastName }) => { 
