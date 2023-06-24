@@ -17,6 +17,8 @@ import TuitSummaryList from "./tuit-summary-list";
 import LoggerInfoScreen from "./home/LoggerInfo";
 import SearchPage from "./search/search-page";
 import FoodDetailsPage from "./search/food-details";
+import SellerLoginScreen from "./home/sellerScreen";
+import MaintenanceCaloriesPage from "./home/MaintenanceCaloriesPage"
 
 
 const store = configureStore(
@@ -43,7 +45,8 @@ function Tuiter() {
   <Route path="/loggerInfo"  element={<LoggerInfoScreen/>} />
   <Route path="/search-page" element={<SearchPage/>} />
   <Route path="/food/:foodId" element={<FoodDetailsPage />} />
-  
+  <Route path="/sellerScreen" element= {<SellerLoginScreen/>}/>
+  <Route path="/maintenance-calories" element={<MaintenanceCaloriesPage/>} />
 
 </Routes>
 

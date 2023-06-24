@@ -1,6 +1,7 @@
 body {
    font-family: 'Roboto', sans-serif; /* Change the font here */
-   background: #fafafa; /* Subtle background color */
+   background: url('https://img.freepik.com/premium-vector/skyblue-gradient-background-advertisers-gradient-hq-wallpaper_189959-513.jpg?w=1380') no-repeat center center fixed;
+   background-size: cover;
    color: #333; /* This color would match the background color */
    transition: all 0.3s ease-in-out;
 }

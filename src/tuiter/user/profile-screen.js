@@ -20,7 +20,7 @@ function ProfileScreen() {
       const { payload } = await dispatch(profileThunk());
       setProfile(payload);
     };
-  }, [ ]);
+  }, []);
 
   const handleInputChange = (event, prop) => {
     setProfile(prev => ({
@@ -38,21 +38,17 @@ function ProfileScreen() {
             <Card.Body>
               <Form>
                 {profile && Object.keys(profile)
-                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v')
-
+                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v' && prop!=='products')
                   .map((prop) => (
-                    prop === 'fitnessGoalType' ? (
+                    prop === 'password' ? (
                       <Form.Group key={prop}>
                         <Form.Label>{prop}</Form.Label>
-                        <Form.Control 
-                          as="select" 
-                          value={profile[prop]} 
-                          disabled={!edit} 
+                        <Form.Control
+                          type="password"
+                          value={profile[prop]}
+                          disabled={!edit}
                           onChange={(event) => handleInputChange(event, prop)}
-                        >
-                          <option value="weightloss">Weight Loss</option>
-                          <option value="weightgain">Weight Gain</option>
-                        </Form.Control>
+                        />
                       </Form.Group>
                     ) : (
                       <Form.Group key={prop}>

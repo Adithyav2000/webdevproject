@@ -17,7 +17,7 @@ const { currentUser } = useSelector((state) => state.user);
  const nav = [AiOutlineHome, BsHash, IoIosNotificationsOutline, BsEnvelope, BsBookmark, CiViewList, CiCircleMore];
  return (
   <>
-      <button onClick={() => setIsOpen(true)}>More</button>
+      <button className="custom-button" onClick={() => setIsOpen(true)}>More</button>
       {isOpen && <div id="overlay" onClick={() => setIsOpen(false)}></div>}
       
       <div id="sidebar" className={`list-group  ${isOpen ? "open" : ""}`}>
@@ -30,7 +30,6 @@ const { currentUser } = useSelector((state) => state.user);
       </Link>
     )  
     }
-    {console.log(currentUser)}
       {!currentUser && (
       <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/login">
         {createElement(BiLogIn)} 
@@ -55,6 +54,14 @@ const { currentUser } = useSelector((state) => state.user);
        Profile
       </Link>
     )}  
+
+    {currentUser && currentUser.userType==="seller" &&(
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/sellerScreen">
+       {createElement(AiOutlineUser)} 
+       <span>     </span>
+       Products to sell
+      </Link>
+    )}
       
     
    </div>

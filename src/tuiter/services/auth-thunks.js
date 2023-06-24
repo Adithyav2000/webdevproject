@@ -6,6 +6,7 @@ export const loginThunk = createAsyncThunk(
 
  "user/login", async (credentials) => {
    const user = await authService.login(credentials);
+   localStorage.setItem('currentUser', JSON.stringify(user));
    return user;
 
  }
@@ -18,7 +19,9 @@ export const profileThunk = createAsyncThunk(
    });
    export const logoutThunk = createAsyncThunk(
     "auth/logout", async () => {
+    localStorage.removeItem('currentUser');
     return await authService.logout();
+    
    });
    export const updateUserThunk = createAsyncThunk(
     "user/updateUser", async (user) => {
