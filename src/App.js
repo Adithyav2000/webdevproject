@@ -1,6 +1,6 @@
-import Tuiter from "./tuiter";
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route, Navigate} from "react-router";
+import FarmersMarket from "./FM"
 
 function App() {
   return (
@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <div className="container" >
         <Routes>
-        <Route path="/"         element={< Navigate to="/tuiter/home"/>}/>
-          <Route path="/tuiter/*" element={<Tuiter/>}/>
+        <Route path="/"         element={< Navigate to="/FarmersMarket/home"/>}/>
+          <Route path="/FarmersMarket/*" element={<FarmersMarket/>}/>
         </Routes>
       </div>
     </BrowserRouter>

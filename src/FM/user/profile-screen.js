@@ -38,7 +38,7 @@ function ProfileScreen() {
             <Card.Body>
               <Form>
                 {profile && Object.keys(profile)
-                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v' && prop!=='products'&& prop!=='cart'&&prop!=='bought')
+                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v' && prop!=='products'&& prop!=='cart'&&prop!=='bought'&&prop!=='log')
                   .map((prop) => (
                     prop === 'password' ? (
                       <Form.Group key={prop}>
@@ -48,6 +48,7 @@ function ProfileScreen() {
                           value={profile[prop]}
                           disabled={!edit}
                           onChange={(event) => handleInputChange(event, prop)}
+                          style={{marginBottom:10}}
                         />
                       </Form.Group>
                     ) : (
@@ -64,11 +65,11 @@ function ProfileScreen() {
                   ))}
                 <Button variant="danger" onClick={() => {
                   dispatch(logoutThunk());
-                  navigate("/tuiter/login");
-                }}>
+                  navigate("/FarmersMarket/login");
+                }} style={{marginRight:10}}>
                   Logout
                 </Button>
-                <Button variant="primary" onClick={() => setEdit(!edit)} className="ml-3">
+                <Button variant="primary" style={{marginRight:10}} onClick={() => setEdit(!edit)} className="ml-3">
                   {edit ? "Cancel" : "Edit"}
                 </Button>
                 {edit && <Button variant="success" onClick={save} className="ml-3">Save</Button>}

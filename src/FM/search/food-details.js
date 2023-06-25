@@ -153,7 +153,7 @@ function FoodDetailsPage() {
             <li>Carbs: {foodDetails.nutrients.CHOCDF}</li>
             <li>Protein: {foodDetails.nutrients.PROCNT}</li>
           </ul>
-          <Button variant="secondary" onClick={goBack}>Go Back</Button>
+          <Button variant="secondary" onClick={goBack} style={{marginRight:10}}>Go Back</Button>
           <Button variant="primary" onClick={() => setShowReviewModal(true)}>Reviews</Button>
           {currentUser && currentUser.userType === "seller" && (
             <Button variant="primary" onClick={() => setShowModal(true)}>Sell Product</Button>
@@ -222,12 +222,15 @@ function FoodDetailsPage() {
         <Modal.Body>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
-              <div key={index}>
-                <h5>{review.userId}</h5>
-                Rating: {review.rating}<br/>
-                {review.text}<br/>
-                <hr/> <br/>
-              </div>
+<div key={index}>
+  <h5>Username: {review.userId}</h5>
+  <div>
+    Rating:  {review.rating} <span class="star-icon">⭐</span><br/>
+    Comment: <span class="comment-icon">💬</span> {review.text}<br/>
+  </div>
+  <hr/> <br/>
+</div>
+
             ))
           ) : (
             <p>No reviews yet.</p>

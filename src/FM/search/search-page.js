@@ -7,14 +7,13 @@ const healthLabelOptions = [
   'alcohol-free',
   'celery-free',
   'crustacean-free',
-  // Add more options as needed
+
 ];
 
 const categoryOptions = [
   'generic-foods',
   'packaged-foods',
   'restaurant-foods',
-  // Add more options as needed
 ];
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -34,7 +33,7 @@ function SearchPage(uri) {
   const [category, setCategory] = useState(defaultCategory);
 
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false); // Track if results should be displayed
+  const [showResults, setShowResults] = useState(false); 
 
   const [shouldSearch, setShouldSearch] = useState(true);
   const handleInputChange = (event, setter) => {
@@ -82,16 +81,16 @@ function SearchPage(uri) {
   
       if (results.length > 0) {
         setSearchResults(results);
-        setShowResults(true); // Display the results
+        setShowResults(true); 
       } else {
         setSearchResults([]);
-        setShowResults(true); // Display "No results found"
+        setShowResults(true); 
       }
       setShouldSearch(false); 
   
     } catch (error) {
       setSearchResults([]);
-      setShowResults(true); // Display "No results found"
+      setShowResults(true); 
     }
   };
 
@@ -99,8 +98,8 @@ function SearchPage(uri) {
     <>
       <h4>SearchPage</h4>
       <p>This page helps you search for a food and obtain information about its nutrients and other details.</p>
-      <div>
-        <label>Food Type</label>
+      <div style={{marginBottom:10}}>
+        <label style={{marginRight:10}}>Food Type</label>
         <input
           type="text"
           value={foodType}
@@ -108,8 +107,8 @@ function SearchPage(uri) {
         />
       </div>
 
-      <div>
-        <label>Health Label</label>
+      <div style={{marginBottom:10}}>
+        <label style={{marginRight:10}}>Health Label</label>
         <select
           value={healthLabel}
           onChange={(event) => handleInputChange(event, setHealthLabel)}
@@ -124,7 +123,7 @@ function SearchPage(uri) {
       </div>
 
       <div>
-        <label>Category</label>
+        <label style={{marginBottom:10,marginRight:10}}>Category</label>
         <select
           value={category}
           onChange={(event) => handleInputChange(event, setCategory)}
@@ -141,7 +140,7 @@ function SearchPage(uri) {
       <Button onClick={handleSearch}>Search</Button> <Button variant="secondary" onClick={goBack}>Go Back</Button>
 
       {showResults && searchResults.length > 0 && (
-        <div>
+        <div style={{marginTop:10,marginBottom:10}}>
           <h4>Search Results</h4>
           <ul>
           {showResults && searchResults.length > 0 && (
@@ -152,7 +151,7 @@ function SearchPage(uri) {
                 <img src={result.food.image} alt={result.food.label} className="card-img-top" />
                 <div className="card-body">
                   <h5 className="card-title">{result.food.label}</h5>
-                  <button onClick={() => navigate(`/tuiter/food/${result.food.label}`)} className="btn btn-primary">
+                  <button onClick={() => navigate(`/FarmersMarket/food/${result.food.label}`)} className="btn btn-primary">
                     View Details
                   </button>
                 </div>

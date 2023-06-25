@@ -1,12 +1,12 @@
 body {
-   font-family: 'Roboto', sans-serif; /* Change the font here */
+   font-family: 'Roboto', sans-serif; 
    background: url('https://img.freepik.com/premium-vector/skyblue-gradient-background-advertisers-gradient-hq-wallpaper_189959-513.jpg?w=1380') no-repeat center center fixed;
    background-size: cover;
-   color: #333; /* This color would match the background color */
+   color: #333; 
    transition: all 0.3s ease-in-out;
 }
 
-/* Other Styles */
+
 .wd-tabs li {
    display: inline;
 }
@@ -28,7 +28,7 @@ body {
    top: 4px;
 }
 
-/* Header title styling */
+
 #header-title {
    font-size: 2.5rem;
    color: #333;
@@ -39,7 +39,6 @@ body {
    box-shadow: 5px 10px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Slideshow Styling */
 .slide {
    width: 100%;
    opacity: 0;
@@ -52,7 +51,7 @@ body {
 }
 .image-height {
    height: 400px;
-   object-fit: cover; /* This will ensure the image aspect ratio is maintained */
+   object-fit: cover; 
 }
 .bold {
    font-size: 15px;
@@ -69,10 +68,10 @@ body {
    background: #fff;
    border: 1px solid #ccc;
    z-index: 1;
-   top: 50px; /* adjust this value to set the dropdown's position relative to the input field */
+   top: 50px;
  }
  .fs-3.position-absolute.wd-nudge-up {
-   top: 1; /* adjust this value to fix the position of the search icon */
+   top: 1; 
    right: 0;
    cursor: pointer;
  }

@@ -13,12 +13,12 @@ import LoggerInfoScreen from "./home/LoggerInfo";
 import SearchPage from "./search/search-page";
 import FoodDetailsPage from "./search/food-details";
 import SellerLoginScreen from "./home/sellerScreen";
-import MaintenanceCaloriesPage from "./home/MaintenanceCaloriesPage"
+
 import BuyerCartScreen from "./home/buyer-cart";
 import OrderHistoryScreen from "./home/orderHistory";
 import ProfileSearch from "./home/profile-search";
 import NewPostInput from "./whats-happening";
-import Tuits from "./home/tuits";
+import Poster from "./home/poster";
 
 
 const store = configureStore(
@@ -26,7 +26,7 @@ const store = configureStore(
   
 });
 
-function Tuiter() {
+function FarmersMarket() {
  return (
   <Provider store={store}>
    <div>
@@ -46,7 +46,6 @@ function Tuiter() {
   <Route path="/search-page" element={<SearchPage/>} />
   <Route path="/food/:foodId" element={<FoodDetailsPage />} />
   <Route path="/sellerScreen" element= {<SellerLoginScreen/>}/>
-  <Route path="/maintenance-calories" element={<MaintenanceCaloriesPage/>} />
   <Route path="/buyer-cart" element={<BuyerCartScreen/>} />
   <Route path="/orderHistory" element={<OrderHistoryScreen/>} />
   <Route path="/profilesearch" element={<ProfileSearch/>} />
@@ -55,10 +54,11 @@ function Tuiter() {
 </Routes>
 
        </div>
-       <div className="col-4">
-       <h4 className="header-title mt-2">Recent Reviews</h4>
-       <Tuits/>
-        
+       <div className="col-4 p-2 d-none d-md-block">
+       <h4 className="header-title mt-2">Recent News</h4>
+       <div style={{maxHeight: '50vh', overflowY: 'auto'}}>
+      <Poster/>
+   </div>
 
        </div>
      </div>
@@ -66,4 +66,4 @@ function Tuiter() {
    </Provider>
  );
 }
-export default Tuiter;
+export default FarmersMarket;

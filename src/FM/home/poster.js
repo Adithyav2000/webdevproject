@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { findTuitsThunk } from '../services/post-thunks';
 import Card from 'react-bootstrap/Card';
 
-const Tuits = () => {
+const Poster = () => {
   const dispatch = useDispatch();
   const [tuits, setTuits] = useState([]);
 
@@ -26,12 +26,13 @@ const Tuits = () => {
 
   return (
     <div>
-      {tuits.map(tuit => (
+      {tuits && tuits.map(tuit => (
         <Card key={tuit._id}>
           <Card.Body>
             <Card.Title>{tuit.topic}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               By {tuit.userName} - {tuit.time}
+              {tuit.image && <Card.Img variant="top" src={tuit.image} />} 
             </Card.Subtitle>
             <Card.Text>{tuit.tuit}</Card.Text>
           </Card.Body>
@@ -41,4 +42,4 @@ const Tuits = () => {
   );
 }
 
-export default Tuits;
+export default Poster;

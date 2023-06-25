@@ -1,9 +1,9 @@
 #sidebar {
-    position: fixed; /* changed from absolute to fixed */
+    position: fixed; 
     top: 0;
     left: -100%;
     height: 100%;
-    z-index: 2; /* high value to bring above other content */
+    z-index: 2; 
     transition: left 0.3s ease;
     background-color: rgb(93, 173, 226);
   }
@@ -18,8 +18,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
-    z-index: 1; /* slightly lower than the sidebar so it appears underneath */
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
   }
  #coll{
     background-color: rgb(93, 173, 226);
@@ -28,7 +28,7 @@
     color: #ffffff;;
  }
  .custom-button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 10px 20px;

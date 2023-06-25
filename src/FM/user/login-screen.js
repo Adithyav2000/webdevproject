@@ -14,7 +14,7 @@ function LoginScreen() {
     if (user.error) {
       throw new Error(user.error.message);
     }
-    navigate("/tuiter/profilesearch");
+    navigate("/FarmersMarket/profilesearch");
   } catch (e) {
     alert(e.message);
   }

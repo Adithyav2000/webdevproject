@@ -5,14 +5,16 @@ import { useSelector } from "react-redux";
 import ProfileScreen from '../user/profile-screen';
 
 const ProfileSearch = () => {
-  const { currentUser } = useSelector((state) => state.user); // gets the current user from redux store
+  const { currentUser } = useSelector((state) => state.user); 
   const [searchInput, setSearchInput] = useState('');
   const [users, setUsers] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
+    const SERVER_API_URL = process.env.REACT_APP_API_BASE;
+    const PRODUCTS_URL = `${SERVER_API_URL}/users`;
     axios
-      .get('http://localhost:4000/api/users')
+      .get(PRODUCTS_URL)
       .then(res => {
         setUsers(res.data);
       })
@@ -125,7 +127,11 @@ const ProfileSearch = () => {
               </Col>
             ))
           ) : (
-            <h2>No results found</h2>
+            <div>
+            <h5>No results found</h5>
+            <h3> Search for profiles here </h3>
+            <h3> No Profile yet? Click on register to get a new account or login if you are already a user. </h3>
+</div>
           )}
         </Row>
       </Container>

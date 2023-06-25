@@ -13,7 +13,7 @@ function RegisterScreen() {
  const handleRegister = async () => {
   try {
     await dispatch(registerthunk({ username, password }));
-    navigate('/tuiter/profileinfo');
+    navigate('/FarmersMarket/profileinfo');
   } catch (e) {
     alert(e);
   }

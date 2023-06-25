@@ -8,11 +8,11 @@ import "./index.css";
 function Home() {
   const [foodImages, setFoodImages] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [searchInput, setSearchInput] = useState(''); // Track the search input
+  const [searchInput, setSearchInput] = useState(''); 
   const navigate = useNavigate();
-  const [advancedSearch, setAdvancedSearch] = useState(false); // Track the visibility of advanced search options
-  const [healthLabel, setHealthLabel] = useState(''); // Track the health label
-  const [category, setCategory] = useState(''); // Track the category
+  const [advancedSearch, setAdvancedSearch] = useState(false); 
+  const [healthLabel, setHealthLabel] = useState(''); 
+  const [category, setCategory] = useState('');
 
   const foodItems = [
     'Quinoa',
@@ -143,16 +143,16 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    const next = (current + 1) % foodImages.length; // Move to next slide after 3 seconds
+    const next = (current + 1) % foodImages.length;
     const id = setTimeout(() => setCurrent(next), 3000);
-    return () => clearTimeout(id); // Prevents memory leak
+    return () => clearTimeout(id); 
   }, [current, foodImages]);
   console.log(foodImages);
 
   const handleSearch = (event) => {
     event.preventDefault();
     if (searchInput.trim() !== '') {
-      navigate(`/tuiter/search-page?foodType=${searchInput}&healthLabel=${healthLabel}&category=${category}`);
+      navigate(`/FarmersMarket/search-page?foodType=${searchInput}&healthLabel=${healthLabel}&category=${category}`);
     }
   };
   
@@ -189,7 +189,7 @@ function Home() {
         <GoGear className="wd-top-4 float-end fs-3 position-relative" onClick={() => setAdvancedSearch(!advancedSearch)} />
         {advancedSearch && (
           <div className="advanced-search-options">
-            <label>Health Label</label>
+            <label style = {{marginRight:10}}>Health Label</label>
             <select value={healthLabel} onChange={(event) => setHealthLabel(event.target.value)}>
               {healthLabels.map((option, index) => (
                 <option key={index} value={option.value}>{option.label}</option>
@@ -197,7 +197,7 @@ function Home() {
             </select>
 
 
-            <label>Category</label>
+            <label  style={{marginRight:10,marginLeft:10}}>Category</label>
             <select value={category} onChange={(event) => setCategory(event.target.value)}>
               {categories.map((option, index) => (
                 <option key={index} value={option.value}>{option.label}</option>

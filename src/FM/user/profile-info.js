@@ -14,7 +14,7 @@ function ProfileInfoScreen() {
   const onSubmit = async (data) => {
     console.log(data)
     await dispatch(updateUserThunk({...currentUser, ...data}));
-    navigate('/tuiter/profilesearch');
+    navigate('/FarmersMarket/profilesearch');
   };
 
   return (
@@ -53,7 +53,6 @@ function ProfileInfoScreen() {
             <option value="logger">Food Logger</option>
           </select>
         </div>
-
 
         {userType === 'normal' && (
           <div className="form-group">
@@ -126,6 +125,23 @@ function ProfileInfoScreen() {
               {errors.fitnessGoalWeight && <p>{errors.fitnessGoalWeight.message}</p>}
             </div>
 
+            
+        <div className="form-group">
+          <label>Age</label>
+          <input className="form-control" type="number" {...register('age', { required: "Age is required" })} />
+          {errors.age && <p>{errors.age.message}</p>}
+        </div>
+
+        <div className="form-group">
+          <label>Gender</label>
+          <select className="form-control" {...register('gender', { required: "Gender is required" })}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          {errors.gender && <p>{errors.gender.message}</p>}
+        </div>
+
             <div className="form-group">
               <label>Body Type</label>
               <select className="form-control" {...register('bodyType', { required: "Body Type is required" })}>
@@ -138,7 +154,7 @@ function ProfileInfoScreen() {
           </>
         )}
 
-        <button className="btn btn-primary" type="submit">Submit</button>
+        <button className="btn btn-primary" type="submit" style={{marginTop:10}}>Submit</button>
       </form>
     </div>
   );
