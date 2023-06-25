@@ -34,6 +34,7 @@ function LoggerInfoScreen() {
   };
 
   const handleDateChange = (event) => {
+    console.log(currentUser)
     const dateStr = event.target.value;  
     setSelectedDate(new Date(dateStr));
 
