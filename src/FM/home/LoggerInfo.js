@@ -24,10 +24,7 @@ function LoggerInfoScreen() {
 
     const updatedUser = {
       ...currentUser,
-      log: {
-        ...currentUser.log,
-        [dateStr]: newLog,
-      },
+      log: currentUser.log ? [...currentUser.log, newLog] : [newLog],
     };
 
     dispatch(updateUserThunk(updatedUser));
@@ -38,7 +35,7 @@ function LoggerInfoScreen() {
     const dateStr = event.target.value;  
     setSelectedDate(new Date(dateStr));
 
-    if (currentUser.log && currentUser.log[dateStr]) {
+    if (currentUser.log && currentUser.log.find(log => log.date === dateStr)) {
       setMealChoices(currentUser.log[dateStr]);
     } else {
       handleClear();
