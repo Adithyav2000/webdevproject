@@ -24,3 +24,7 @@ export const deleteProduct = async (foodId) => {
   const response = await api.delete(`${PRODUCTS_URL}/${foodId}`);
   return response.data;
 };
+export const addReviewToProduct = async (foodId, review) => {
+  const response = await api.post(`${PRODUCTS_URL}/${foodId}/reviews`, review);
+  return response.data;
+};

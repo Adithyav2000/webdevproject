@@ -25,3 +25,12 @@ export const deleteProductThunk = createAsyncThunk(
    const data = await productService.deleteProduct(foodId);
    return data;
  });
+
+ export const addReviewToProductThunk = createAsyncThunk(
+  "product/addReviewToProduct",
+  async ({ foodId, review }) => {
+    
+      const data = await productService.addReviewToProduct(foodId, review);
+      return data;
+  }
+);

@@ -28,3 +28,8 @@ export const logout = async () => {
     const user = response.data;
     return user;
    };
+
+   export const fetchUserCompanyName = async (userId) => {
+    const response = await api.get(`${USERS_URL}/${userId}/company`);
+    return response.data;
+  };

@@ -35,4 +35,15 @@ export const profileThunk = createAsyncThunk(
       const user = await authService.login(credentials);
       return user;
    });
+
+   export const fetchUserCompanyNameThunk = createAsyncThunk(
+    "user/fetchUserCompanyName",
+    async ([userId, foodId]) => {
+      const response = await authService.fetchUserCompanyName(userId);
+    const product = response.prod.find(product => product.foodId === foodId);
+    const r = `${response.companyName}, price per quantity = ${product.price} $'s`;
+    console.log(r)
+    return r;
+    }
+  );
    

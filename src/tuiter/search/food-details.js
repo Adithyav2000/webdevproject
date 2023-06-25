@@ -2,22 +2,49 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Button, Modal, Form } from 'react-bootstrap';
-import { updateUserThunk } from "../services/auth-thunks";
-import {createProductThunk} from "../services/product-thunk";
+import { Button, Modal, Form, Dropdown } from 'react-bootstrap';
+import { updateUserThunk, fetchUserCompanyNameThunk} from "../services/auth-thunks";
+import { createProductThunk, getProductThunk } from "../services/product-thunk";
 
 function FoodDetailsPage() {
   const { foodId } = useParams();
   const [foodDetails, setFoodDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ quantity: '', price: '', description: '' });
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [formData, setFormData] = useState({ price: '', description: '' });
+  const [sellers, setSellers] = useState([]);
+  const [selectedSeller, setSelectedSeller] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchDetails();
+    fetchSellers();
   }, [foodId]);
+
+
+  const fetchSellers = async () => {
+    dispatch(getProductThunk(foodId))
+      .then(res => { 
+        if (res.payload && Array.isArray(res.payload.otherCollectionIds)) {
+          const sellerIds = res.payload.otherCollectionIds;
+          const sellerCompanyNamesPromises = sellerIds.map(sellerId => {
+            return dispatch(fetchUserCompanyNameThunk([sellerId, foodId ])).then(response => response.payload)
+          });
+          
+          Promise.all(sellerCompanyNamesPromises)
+            .then(sellerCompanyNames => {
+              setSellers(sellerCompanyNames);
+            });
+        } else {
+          console.error('Unexpected data structure for sellers: ', res.payload);
+        }
+      })
+      .catch(err => console.error('Failed to fetch sellers: ', err));
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -27,8 +54,40 @@ function FoodDetailsPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  const addToCart = () => {
+    if (!currentUser) {
+      console.log('User not logged in.');
+      return;
+    
+    }
+
+    const updatedProfile = {
+      ...currentUser,
+      cart: [
+        ...(currentUser.cart || []),
+        {
+          foodId,
+          quantity,
+          price: foodDetails.price,
+          description: foodDetails.description,
+          image: foodDetails.image,
+          seller: selectedSeller
+          
+        },
+      ],
+    };
+    dispatch(updateUserThunk(updatedProfile));
+    setShowModal(false); 
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!currentUser) {
+      console.log('User not logged in.');
+      return;
+    }
+
     const updatedProfile = {
       ...currentUser,
       products: [
@@ -38,7 +97,8 @@ function FoodDetailsPage() {
           quantity: formData.quantity,
           price: formData.price,
           description: formData.description,
-          image:foodDetails.image
+          image: foodDetails.image
+          
         },
       ],
     };
@@ -46,9 +106,13 @@ function FoodDetailsPage() {
     dispatch(createProductThunk({
       foodId,
       userid: currentUser._id
-    },))
-    setFormData({ quantity: '', price: '', description: '' });
+    }))
+    setFormData({ price: '', description: '' });
     setShowModal(false);
+  }
+
+  const handleSelect = (e) => {
+    setSelectedSeller(e);
   }
 
   const fetchDetails = async () => {
@@ -60,6 +124,16 @@ function FoodDetailsPage() {
       } else {
         console.log('No details found for this food.');
       }
+
+      dispatch(getProductThunk(foodId))
+        .then(res => {
+          if (res.payload && Array.isArray(res.payload.reviews)) {
+            setReviews(res.payload.reviews);
+          } else {
+            console.error('Unexpected data structure for reviews: ', res.payload);
+          }
+        })
+        .catch(err => console.error('Failed to fetch product details: ', err));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -80,8 +154,16 @@ function FoodDetailsPage() {
             <li>Protein: {foodDetails.nutrients.PROCNT}</li>
           </ul>
           <Button variant="secondary" onClick={goBack}>Go Back</Button>
+          <Button variant="primary" onClick={() => setShowReviewModal(true)}>Reviews</Button>
           {currentUser && currentUser.userType === "seller" && (
             <Button variant="primary" onClick={() => setShowModal(true)}>Sell Product</Button>
+
+          )}
+          {currentUser && currentUser.userType === "normal" && (
+            <>
+              <Button variant="primary" onClick={() => setShowModal(true)}>Buy Product</Button>
+              
+            </>
           )}
         </div>
       ) : (
@@ -89,24 +171,67 @@ function FoodDetailsPage() {
       )}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Sell Product</Modal.Title>
+          <Modal.Title>{currentUser && currentUser.userType === "normal" ? "Buy Product" : "Sell Product"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Quantity Available</Form.Label>
-              <Form.Control type="number" name="quantity" value={formData.quantity} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Price Per Quantity</Form.Label>
-              <Form.Control type="number" name="price" value={formData.price} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" name="description" value={formData.description} onChange={handleInputChange} />
-            </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
-          </Form>
+          {currentUser && currentUser.userType === "normal" ? (
+            <Form onSubmit={(e) => {
+              e.preventDefault();
+              addToCart();
+            }}>
+              <Form.Group>
+                <Form.Label>Quantity</Form.Label>
+                <Form.Control type="number" name="quantity" value={quantity} onChange={e => setQuantity(e.target.value)} />
+              </Form.Group>
+              <Dropdown onSelect={handleSelect}>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {selectedSeller || 'Select Seller'}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {sellers.map((seller, index) => (
+                    <Dropdown.Item eventKey={seller}>{seller}</Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <Button variant="primary" type="submit">Add to Cart</Button>
+            </Form>
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Quantity Available</Form.Label>
+                <Form.Control type="number" name="quantity" value={formData.quantity} onChange={handleInputChange} />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Price Per Quantity</Form.Label>
+                <Form.Control type="number" name="price" value={formData.price} onChange={handleInputChange} />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" name="description" value={formData.description} onChange={handleInputChange} />
+              </Form.Group>
+              <Button variant="primary" type="submit">Submit</Button>
+            </Form>
+          )}
+        </Modal.Body>
+      </Modal>
+      <Modal show={showReviewModal} onHide={() => setShowReviewModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reviews</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {reviews.length > 0 ? (
+            reviews.map((review, index) => (
+              <div key={index}>
+                <h5>{review.userId}</h5>
+                Rating: {review.rating}<br/>
+                {review.text}<br/>
+                <hr/> <br/>
+              </div>
+            ))
+          ) : (
+            <p>No reviews yet.</p>
+          )}
         </Modal.Body>
       </Modal>
     </>

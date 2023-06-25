@@ -178,7 +178,7 @@ function ExploreScreen() {
         <div className="col-11 position-relative">
           <form onSubmit={handleSearch}>
             <input
-              placeholder="Search Tuiter"
+              placeholder="Search products"
               className="form-control rounded-pill ps-5"
               value={searchInput}
               onChange={(event) => setSearchInput(event.target.value)}

@@ -19,6 +19,8 @@ import SearchPage from "./search/search-page";
 import FoodDetailsPage from "./search/food-details";
 import SellerLoginScreen from "./home/sellerScreen";
 import MaintenanceCaloriesPage from "./home/MaintenanceCaloriesPage"
+import BuyerCartScreen from "./home/buyer-cart";
+import OrderHistoryScreen from "./home/orderHistory";
 
 
 const store = configureStore(
@@ -47,6 +49,9 @@ function Tuiter() {
   <Route path="/food/:foodId" element={<FoodDetailsPage />} />
   <Route path="/sellerScreen" element= {<SellerLoginScreen/>}/>
   <Route path="/maintenance-calories" element={<MaintenanceCaloriesPage/>} />
+  <Route path="/buyer-cart" element={<BuyerCartScreen/>} />
+  <Route path="/orderHistory" element={<OrderHistoryScreen/>} />
+
 
 </Routes>
 

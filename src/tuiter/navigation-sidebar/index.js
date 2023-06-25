@@ -62,6 +62,22 @@ const { currentUser } = useSelector((state) => state.user);
        Products to sell
       </Link>
     )}
+
+{currentUser && currentUser.userType==="normal" &&(
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/buyer-cart">
+       {createElement(AiOutlineUser)} 
+       <span>     </span>
+       Buyer Cart
+      </Link>
+    )}
+
+{currentUser && currentUser.userType==="normal" &&(
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/orderHistory">
+       {createElement(AiOutlineUser)} 
+       <span>     </span>
+       Order History
+      </Link>
+    )}
       
     
    </div>
