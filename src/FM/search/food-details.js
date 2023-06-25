@@ -117,7 +117,7 @@ function FoodDetailsPage() {
 
   const fetchDetails = async () => {
     try {
-      const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?app_id=c19f8207&app_key=39edd12c970c2cdbe5cceedfe7dbdb5b&ingr=${foodId}`);
+      const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?app_id=c19f8207&app_key=39edd12c970c2cdbe5cceedfe7dbdb5b&ingr=${foodId}&nutrition-type=logging`);
       const data = await response.json();
       if (data.parsed && data.parsed.length > 0) {
         setFoodDetails(data.parsed[0].food);
