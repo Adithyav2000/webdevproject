@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GoGear } from "react-icons/go";
-import { Link, useNavigate } from "react-router-dom";
-import SearchPage from "../search/search-page";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 
-function ExploreScreen() {
+function Home() {
   const [foodImages, setFoodImages] = useState([]);
   const [current, setCurrent] = useState(0);
   const [searchInput, setSearchInput] = useState(''); // Track the search input
@@ -233,4 +232,4 @@ function ExploreScreen() {
   );
 }
 
-export default ExploreScreen;
+export default Home;

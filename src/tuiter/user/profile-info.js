@@ -14,7 +14,7 @@ function ProfileInfoScreen() {
   const onSubmit = async (data) => {
     console.log(data)
     await dispatch(updateUserThunk({...currentUser, ...data}));
-    navigate('/tuiter/profile');
+    navigate('/tuiter/profilesearch');
   };
 
   return (

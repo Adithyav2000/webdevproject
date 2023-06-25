@@ -14,7 +14,7 @@ function LoginScreen() {
     if (user.error) {
       throw new Error(user.error.message);
     }
-    navigate("/tuiter/profile");
+    navigate("/tuiter/profilesearch");
   } catch (e) {
     alert(e.message);
   }

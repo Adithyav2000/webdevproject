@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div className="container" >
         <Routes>
-        <Route path="/"         element={< Navigate to="/tuiter"/>}/>
+        <Route path="/"         element={< Navigate to="/tuiter/home"/>}/>
           <Route path="/tuiter/*" element={<Tuiter/>}/>
         </Routes>
       </div>

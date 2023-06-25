@@ -1,8 +1,7 @@
 import React, {useState,  createElement } from "react";
 import{ AiOutlineHome,AiOutlineUser, AiOutlineClose} from "react-icons/ai"
-import {BsHash,BsEnvelope,BsBookmark} from "react-icons/bs"
-import {IoIosNotificationsOutline,IoIosCreate} from "react-icons/io"
-import{CiViewList, CiCircleMore} from "react-icons/ci"
+import {BsHash} from "react-icons/bs"
+import {IoIosCreate} from "react-icons/io"
 import { useSelector } from "react-redux";
 import {BiLogIn} from "react-icons/bi"
 import { Link, useLocation } from "react-router-dom";
@@ -12,9 +11,9 @@ const NavigationSidebar = () => {
 const [isOpen, setIsOpen] = useState(false);  
 const { currentUser } = useSelector((state) => state.user);
  const { pathname } = useLocation();
- const [ignore, tuiter, active] = pathname.split("/");
- const links = ["home",  "explore",   "notifications", "messages", "bookmarks", "lists",  "more"];
- const nav = [AiOutlineHome, BsHash, IoIosNotificationsOutline, BsEnvelope, BsBookmark, CiViewList, CiCircleMore];
+ const [active] = pathname.split("/");
+ const links = ["home",  "Advertize"];
+ const nav = [AiOutlineHome, BsHash];
  return (
   <>
       <button className="custom-button" onClick={() => setIsOpen(true)}>More</button>
@@ -47,13 +46,15 @@ const { currentUser } = useSelector((state) => state.user);
       </Link>
     )}
     
-    {currentUser && (
-      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/profile">
+    {(
+      <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/profilesearch">
        {createElement(AiOutlineUser)} 
        <span>     </span>
        Profile
       </Link>
     )}  
+
+    
 
     {currentUser && currentUser.userType==="seller" &&(
       <Link id="coll" className="list-group-item text-capitalize" to="/tuiter/sellerScreen">

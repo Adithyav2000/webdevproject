@@ -1,53 +1,35 @@
-import React, {useState} from "react";
-import { AiOutlinePicture } from "react-icons/ai";
-import { BsFiletypeGif } from "react-icons/bs";
-import {MdFormatListBulleted} from "react-icons/md"
-import { BiBold, BiItalic } from "react-icons/bi";
-import {TbCalendarStats} from "react-icons/tb";
-import {BsEmojiSmile} from "react-icons/bs";
-import {HiOutlineLocationMarker} from "react-icons/hi"
-import {createTuitThunk} from "./services/tuits-thunks";
+import React, {useState} from "react"
+import {createTuitThunk} from "./services/post-thunks";
 import {useDispatch} from "react-redux";
  
-const WhatsHappening = () => {
- let [whatsHappening, setWhatsHappening] = useState('');
+const NewPostInput = () => {
+ let [currentPostText, setCurrentPostText] = useState('');
  const dispatch = useDispatch();
- const tuitClickHandler = () => {
-    const newTuit = {
-        tuit: whatsHappening
+ const postClickHandler = () => {
+    const newPost = {
+        tuit: currentPostText
       }
-      dispatch(createTuitThunk(newTuit));
-      setWhatsHappening("");
+      dispatch(createTuitThunk(newPost));
+      setCurrentPostText("");
  }
  return (
    <div className="row">
      <div className="col-auto">
-       <img src="/images/nasa.png" width={60}/>
      </div>
      <div className="col-10">
-       <textarea value={whatsHappening} placeholder="What's happening?"
+       <textarea value={currentPostText} placeholder="Advertise your product"
                className="form-control border-0"
-               onChange={(event) => setWhatsHappening(event.target.value)}>
+               onChange={(event) => setCurrentPostText(event.target.value)}>
        </textarea>
        <div>
          <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
-                 onClick={tuitClickHandler}>
-           Tuit
+                 onClick={postClickHandler}>
+           Post
          </button>
-         <div className="text-primary fs-2">
-           <AiOutlinePicture className="me-3"/>
-           <BsFiletypeGif className="me-3"/>
-           <MdFormatListBulleted className="me-3"/>
-           <BsEmojiSmile className="me-3"/>
-           <TbCalendarStats className="me-3"/>
-           <HiOutlineLocationMarker className="me-3"/>
-           <BiBold className="me-3"/>
-           <BiItalic className="me-3"/>
-         </div>
        </div>
      </div>
      <div className="col-12"><hr/></div>
    </div>
  );
 }
-export default WhatsHappening;
+export default NewPostInput;
