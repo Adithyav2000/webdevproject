@@ -32,16 +32,22 @@ function LoggerInfoScreen() {
   };
 
   const handleDateChange = (event) => {
-    console.log(currentUser)
-    const dateStr = event.target.value;  
-    setSelectedDate(new Date(dateStr));
+  const dateStr = event.target.value;  
+  setSelectedDate(new Date(dateStr));
 
-    if (currentUser.log && currentUser.log.find(log => log.date === dateStr)) {
-      setMealChoices(currentUser.log[dateStr]);
-    } else {
-      handleClear();
-    }
-  };
+  const logEntry = currentUser.log?.find(log => log.date === dateStr);
+
+  if (logEntry) {
+    setMealChoices({
+      breakfast: logEntry.breakfast || [],
+      lunch: logEntry.lunch || [],
+      snacks: logEntry.snacks || [],
+      dinner: logEntry.dinner || [],
+    });
+  } else {
+    handleClear();
+  }
+};
 
   const {
     age,
