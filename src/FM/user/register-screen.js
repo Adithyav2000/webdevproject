@@ -12,12 +12,15 @@ function RegisterScreen() {
 
  const handleRegister = async () => {
   try {
-    await dispatch(registerthunk({ username, password }));
+    let r = await dispatch(registerthunk({ username, password }));
+    if (r.error) { 
+      throw r.error;
+    }
     navigate('/FarmersMarket/profileinfo');
   } catch (e) {
     alert(e);
   }
- };
+};
 
  return (
     <Container className="mt-5">
