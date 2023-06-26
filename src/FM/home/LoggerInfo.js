@@ -16,6 +16,7 @@ function LoggerInfoScreen() {
   const handleSaveLog = () => {
     const dateStr = selectedDate.toISOString().slice(0,10);  
     const newLog = {
+      date: dateStr,
       breakfast: mealChoices.breakfast,
       lunch: mealChoices.lunch,
       snacks: mealChoices.snacks,
