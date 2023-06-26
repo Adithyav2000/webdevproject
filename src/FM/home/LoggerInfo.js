@@ -14,7 +14,7 @@ function LoggerInfoScreen() {
   const ageMultiplier = 5;
   
  const handleSaveLog = () => {
-  const dateStr = selectedDate.toISOString().slice(0,10);
+  const dateStr = selectedDate.toISOString().slice(0,10);  
 
   const newLog = {
     date: dateStr,
@@ -24,18 +24,11 @@ function LoggerInfoScreen() {
     dinner: mealChoices.dinner,
   };
 
-  let updatedLog = [];
+  // Filter out the old log for the matching date
+  const updatedLog = currentUser.log ? currentUser.log.filter((log) => log.date !== dateStr) : [];
 
-  if (currentUser.log) {
-    updatedLog = currentUser.log.map((log) => 
-      log.date === dateStr ? newLog : log
-    );
-    if (!currentUser.log.some((log) => log.date === dateStr)) {
-      updatedLog.push(newLog);
-    }
-  } else {
-    updatedLog = [newLog];
-  }
+  // Append the new log
+  updatedLog.push(newLog);
 
   const updatedUser = {
     ...currentUser,
@@ -44,7 +37,6 @@ function LoggerInfoScreen() {
 
   dispatch(updateUserThunk(updatedUser));
 };
-
   const handleDateChange = (event) => {
   const dateStr = event.target.value;  
   setSelectedDate(new Date(dateStr));
