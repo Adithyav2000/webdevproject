@@ -38,7 +38,9 @@ function LoggerInfoScreen() {
   dispatch(updateUserThunk(updatedUser));
 };
   const handleDateChange = (event) => {
+    
   const dateStr = event.target.value;  
+    console.log(currentUser.log,dateStr);
   setSelectedDate(new Date(dateStr));
 
   const logEntry = currentUser.log?.find(log => log.date === dateStr);
