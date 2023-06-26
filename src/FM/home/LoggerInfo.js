@@ -13,23 +13,37 @@ function LoggerInfoScreen() {
   const weightMultiplier = 10;
   const ageMultiplier = 5;
   
-  const handleSaveLog = () => {
-    const dateStr = selectedDate.toISOString().slice(0,10);  
-    const newLog = {
-      date: dateStr,
-      breakfast: mealChoices.breakfast,
-      lunch: mealChoices.lunch,
-      snacks: mealChoices.snacks,
-      dinner: mealChoices.dinner,
-    };
+ const handleSaveLog = () => {
+  const dateStr = selectedDate.toISOString().slice(0,10);
 
-    const updatedUser = {
-      ...currentUser,
-      log: currentUser.log ? [...currentUser.log, newLog] : [newLog],
-    };
-
-    dispatch(updateUserThunk(updatedUser));
+  const newLog = {
+    date: dateStr,
+    breakfast: mealChoices.breakfast,
+    lunch: mealChoices.lunch,
+    snacks: mealChoices.snacks,
+    dinner: mealChoices.dinner,
   };
+
+  let updatedLog = [];
+
+  if (currentUser.log) {
+    updatedLog = currentUser.log.map((log) => 
+      log.date === dateStr ? newLog : log
+    );
+    if (!currentUser.log.some((log) => log.date === dateStr)) {
+      updatedLog.push(newLog);
+    }
+  } else {
+    updatedLog = [newLog];
+  }
+
+  const updatedUser = {
+    ...currentUser,
+    log: updatedLog,
+  };
+
+  dispatch(updateUserThunk(updatedUser));
+};
 
   const handleDateChange = (event) => {
   const dateStr = event.target.value;  
