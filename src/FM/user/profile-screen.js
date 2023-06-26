@@ -38,7 +38,7 @@ function ProfileScreen() {
             <Card.Body>
               <Form>
                 {profile && Object.keys(profile)
-                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v' && prop!=='products'&& prop!=='cart'&&prop!=='bought'&&prop!=='log')
+                  .filter(prop => profile[prop] && prop !== '_id' && prop !== '__v' && prop!=='products'&& prop!=='cart'&&prop!=='bought'&&prop!=='log'&&prop!=='userType')
                   .map((prop) => (
                     prop === 'password' ? (
                       <Form.Group key={prop}>
