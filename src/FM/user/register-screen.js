@@ -18,7 +18,7 @@ function RegisterScreen() {
     }
     navigate('/FarmersMarket/profileinfo');
   } catch (e) {
-    alert(e);
+    alert("user already exists");
   }
 };
 
